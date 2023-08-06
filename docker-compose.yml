@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+
+  m1:
+    container_name: m1
+    build:
+      context: ./m1
+    ports:
+      - '1337:1337'
+    restart: always
+    depends_on:
+      rabbitmq:
+        condition: service_started
+
+
+  m2:
+    container_name: m2
+    build:
+      context: ./m2
+    restart: always
+    depends_on:
+      rabbitmq:
+        condition: service_started
+
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3-management-alpine
+    ports:
+      - '5672:5672'
+      - '15672:15672'
