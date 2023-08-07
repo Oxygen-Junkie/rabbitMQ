@@ -21,7 +21,7 @@ amqp.connect('amqp://rabbitmq').then((connection) => {
 				json[key] = newValue
 			})
 			  channel.sendToQueue(message?.properties.replyTo, Buffer.from(JSON.stringify(json)))
-			  channel.ack(message)
+			  channel.ack(message!)
 		})
 	})
 })
