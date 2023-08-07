@@ -21,7 +21,9 @@ const postController = (req: http.IncomingMessage, res: http.ServerResponse<http
 			body += data
 		})
 		req.on('end', async () => {
-			await channel.sendToQueue(queueName, Buffer.from(body))
+			await channel.sendToQueue(queueName, Buffer.from(body), {
+				replyTo: queueName
+			})
 			res.writeHead(200, {'Content-Type': 'text/plain'})
 			const result = await getResponseFromM2()
 			res.end(result)
