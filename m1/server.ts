@@ -36,6 +36,6 @@ const getResponseFromM2 = async () => {
 	if (resFromConsumer) {
 		return JSON.parse(resFromConsumer.content.toString()!)
 	} else {
-		setTimeout(getResponseFromM2, 200)
+		setTimeout(getResponseFromM2, 100)
 	}
 }
