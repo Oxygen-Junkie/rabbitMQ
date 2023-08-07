@@ -11,9 +11,10 @@ amqp.connect('amqp://rabbitmq').then((connection) => {
 		channel.consume(queueName, (message: amqp.ConsumeMessage | null) => {
 			let text = message?.content.toString()!
 			text = text.split('{').join('{"')
-			text = text.split('}').join('}"')
+			text = text.split('}').join('"}')
 			text = text.split(',').join('","')
 			text = text.split(':').join('":"')
+			console.log(text)
 			const json = JSON.parse(text )
 			Object.entries(json).forEach(([key, value]) => {
 				const newValue = (value as string).split('').reverse().join('')
