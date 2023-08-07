@@ -31,11 +31,11 @@ const postController = (req: http.IncomingMessage, res: http.ServerResponse<http
 
 http.createServer(postController).listen(port)
 
-const getResponseFromM2 = async () => {
+const getResponseFromM2 = async (): Promise<JSON> => {
 	const resFromConsumer = (await channel.get(queueName))
 	if (resFromConsumer) {
 		return JSON.parse(resFromConsumer.content.toString()!)
 	} else {
-		setTimeout(getResponseFromM2, 100)
+		return await getResponseFromM2()
 	}
 }
