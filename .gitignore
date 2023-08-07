@@ -4,3 +4,4 @@
 /m2/pnpm-lock.yaml
 /m2/node_modules
 /m2/dist
+.vscode
