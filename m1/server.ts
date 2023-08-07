@@ -38,6 +38,9 @@ const getResponseFromM2 = async (): Promise<JSON> => {
 	if (resFromConsumer) {
 		return JSON.parse(resFromConsumer.content.toString()!)
 	} else {
+		await wait(150)
 		return await getResponseFromM2()
 	}
 }
+
+const wait = (ms: number) => new Promise(res => setTimeout(res, ms));
