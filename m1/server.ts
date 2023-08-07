@@ -24,8 +24,10 @@ const postController = (req: http.IncomingMessage, res: http.ServerResponse<http
 			await channel.sendToQueue(queueName, Buffer.from(body), {
 				replyTo: queueName
 			})
-			res.writeHead(200, {'Content-Type': 'text/plain'})
+			res.writeHead(200, {'Content-Type': 'application/json'})
 			const result = await getResponseFromM2()
+			console.log('Изменённый JSON полученный от rabbitMQ:')
+			console.log(result)
 			res.end(result)
 		})
 	}
@@ -36,7 +38,8 @@ http.createServer(postController).listen(port)
 const getResponseFromM2 = async (): Promise<JSON> => {
 	const resFromConsumer = (await channel.get(queueName))
 	if (resFromConsumer) {
-		return JSON.parse(resFromConsumer.content.toString()!)
+		let text = resFromConsumer.content.toString()!
+		return JSON.parse(text)
 	} else {
 		await wait(150)
 		return await getResponseFromM2()
