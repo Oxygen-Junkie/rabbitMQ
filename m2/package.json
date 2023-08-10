@@ -1,12 +1,13 @@
 {
-	"name": "test",
+	"name": "consumer",
 	"version": "0.1.0",
-	"description": "test",
-	"main": "server.ts",
+	"description": "consumer",
+	"type":"module",
+	"main": "consumer.ts",
 	"scripts": {
 		"build": "npx tsc",
-		"start": "node dist/server.js",
-		"dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/server.js\"",
+		"start": "node dist/consumer.js",
+		"dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/consumer.js\"",
 		"lint": "eslint ."
 	},
 	"dependencies": {
